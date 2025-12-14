@@ -1,0 +1,62 @@
+name: Github Actions automatisch script
+
+# 1.Draai deze actie als er JSON bestanden in de data map worden gepusht
+on:
+  push:
+    paths:
+      - 'data-workflow/data/JSON/**'
+  # Voeg workflow_dispatch toe zodat je ook handmatig op de "Run" knop kan drukken om te testen
+  workflow_dispatch:
+
+# 2. Rechten: Nodig om naar GitHub Pages te schrijven
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # A. Code ophalen
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # B. Software installeren
+      - name: Installeer systeem tools (jq, pandoc)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq pandoc
+
+      # C. Python libraries installeren
+      - name: Installeer Python dependencies
+        run: pip install pandas matplotlib
+
+      # D. Scripts uitvoerbaar maken
+      - name: Maak scripts uitvoerbaar
+        run: chmod +x data-workflow/Scripts/*.sh
+
+      # Transformeren (JSON -> CSV)
+      # We draaien dit opnieuw zodat de CSV zeker up-to-date is met de nieuwe JSON
+      - name: Run Transformatie
+        run: ./data-workflow/Scripts/transformeren.sh
+
+      # Analyseren (CSV -> Grafiek & Stats)
+      - name: Run Analyse
+        run: python3 data-workflow/Scripts/analyseren.py
+
+      # Rapport Genereren (MD -> HTML)
+      # Dit maakt Rapporten/Rapport.html
+      - name: Genereer Rapport
+        run: ./data-workflow/Scripts/rapport.sh
+
+      # Klaarzetten voor Pages
+      # We uploaden de hele data-workflow map.
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: data-workflow/
+
+      # Publiceren
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

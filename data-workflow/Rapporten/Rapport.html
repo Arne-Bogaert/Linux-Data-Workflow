@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Arne Bogaert" />
+  <title>Data Rapport</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Data Rapport</h1>
+<p class="author">Arne Bogaert</p>
+<p class="date">07-12-2025 18:00</p>
+</header>
+<h1 id="inleiding">1. Inleiding</h1>
+<p>Dit rapport is onderdeel van de opdracht van de geautomatiseerde
+data-workflow. Het doel is om te onderzoeken of er een correlatie
+bestaat tussen de verkeersdrukte (gemeten aan de hand van vrije
+parkeerplaatsen) en de luchtkwaliteit in Gent.</p>
+<p>De data is automatisch verzameld en verwerkt met behulp van Linux
+bash-scripts en Python.</p>
+<h1 id="statistische-analyse">2. Statistische Analyse</h1>
+<p>Hieronder volgen de berekende basisstatistieken van de verzamelde
+dataset. We gebruiken total_free_spots om te weten hoeveel vrije
+parkeerplaatsen er zijn op de moment, we gebruiken ook pm 2_5 en pm10 om
+de kleine deeltjes stofvervuiling te meten. pm2_5 zijn de heel fijne
+stofdeeltjes terwijl pm10 de iets grovere deeltjes zijn. Als laatste
+gebruiken we ook No2 om het aantal stikstofdioxide te meten in de lucht.
+Als metingswaarden gebruiken we Aantal om te weten hoeveel metingen er
+zijn, het gemiddelde voor het gemiddeld aantal parkeerplaatsen, de
+standaardafwijking om te kijken hoe hard de metingen schommelen, en dan
+uiteindelijk het minimum en maximum.</p>
+<pre class="text"><code>=== BASIS STATISTIEKEN DATASET GENT ===
+
+                  Aantal  Gemiddelde  Afwijking  Minimum  Maximum
+total_free_spots    19.0     6020.79     624.40   4960.0   6702.0
+pm2_5               19.0        4.70       1.11      3.5      6.3
+pm10                19.0        6.60       2.23      4.2      9.8
+no2                 19.0        6.82       0.96      5.2      8.5
+
+=== CORRELATIE MATRIX ===
+
+                  total_free_spots  pm2_5  pm10   no2
+total_free_spots              1.00   0.79  0.78  0.17
+pm2_5                         0.79   1.00  0.98 -0.25
+pm10                          0.78   0.98  1.00 -0.16
+no2                           0.17  -0.25 -0.16  1.00</code></pre>
+<h1 id="visualisatie">3. Visualisatie</h1>
+<p>De onderstaande grafiek toont het verloop van de parkeercapaciteit
+(blauwe as) ten opzichte van de concentraties PM2.5, PM10 en NO2 (zwarte
+as) over de tijd.</p>
+<figure>
+<img src="../data/analyse_grafiek.png"
+alt="07-12-2025 18:00 - Grafiek Parkeren vs Lucht" />
+<figcaption aria-hidden="true">07-12-2025 18:00 - Grafiek Parkeren vs
+Lucht</figcaption>
+</figure>
+<h1 id="conclusie-en-observaties">4. Conclusie en Observaties</h1>
+<p>Op basis van een analyse van de data kunnen we enkele interessante
+observaties maken:</p>
+<ol type="1">
+<li><p><strong>Dag/Nacht Cyclus:</strong> Er is een duidelijk patroon
+zichtbaar in de parkeerbezetting, waarbij de parkings ’s nachts
+leeglopen en overdag voller raken.</p></li>
+<li><p><strong>Omgekeerde Correlatie (Weersinvloeden):</strong> Tijdens
+de metingen stelden we vast dat hoewel de parkeerdrukte toenam (minder
+vrije plaatsen), de gemeten luchtvervuiling (NO2) juist daalde.</p>
+<p>Dit gaat in tegen de initiële hypothese (“meer auto’s = meer
+vervuiling”). Een waarschijnlijke verklaring hiervoor zijn
+meteorologische omstandigheden (zoals wind of regen) die de vervuiling
+’s ochtends hebben “schoongeveegd”, ondanks de toegenomen
+verkeersdrukte. Dit toont aan dat luchtkwaliteit sterk afhankelijk is
+van weersfactoren en niet enkel van lokale emissies.</p></li>
+</ol>
+<hr />
+<p><em>Gegenereerd door: Geautomatiseerd script workflow.sh</em></p>
+</body>
+</html>
