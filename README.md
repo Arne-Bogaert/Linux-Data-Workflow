@@ -1,5 +1,4 @@
 # Data Workflow opdracht 
-**Linux for Data Scientists (2025-2026)**
 
 * **Auteur:** Arne Bogaert
 * **Onderwerp:** Correlatieonderzoek Parkeerdrukte in Gent vs. Luchtkwaliteit in Gent
